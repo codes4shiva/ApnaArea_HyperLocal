@@ -27,7 +27,7 @@ interface MarketplaceViewProps {
 }
 
 const PRESET_LISTING_IMAGES = [
-  '/src/assets/images/regenerated_image_1783592286024.webp', // Typewriter
+  'https://images.unsplash.com/photo-1516962215378-7fa2e137ae93?auto=format&fit=crop&q=80&w=400', // Typewriter
   'https://images.unsplash.com/photo-1520639888713-7851133b1ed0?auto=format&fit=crop&q=80&w=400', // Boots
   'https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&q=80&w=400', // Teapot
   'https://images.unsplash.com/photo-1505797149-43b0069ec26b?auto=format&fit=crop&q=80&w=400', // Chair

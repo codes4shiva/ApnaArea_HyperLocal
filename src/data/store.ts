@@ -136,8 +136,8 @@ export function initializeStore() {
         let updatedListings = JSON.parse(existingListingsRaw);
         let updated = false;
         updatedListings = updatedListings.map((l: any) => {
-          if (l.id === 'list-1' && (l.image.includes('photo-1511556532299-8f662fc26c06') || l.image.startsWith('http'))) {
-            l.image = '/src/assets/images/regenerated_image_1783592286024.webp';
+          if (l.id === 'list-1' && l.image !== 'https://images.unsplash.com/photo-1516962215378-7fa2e137ae93?auto=format&fit=crop&q=80&w=600') {
+            l.image = 'https://images.unsplash.com/photo-1516962215378-7fa2e137ae93?auto=format&fit=crop&q=80&w=600';
             updated = true;
           }
           return l;
@@ -155,8 +155,8 @@ export function initializeStore() {
         let updatedUsers = JSON.parse(usersForAvatarRaw);
         let updated = false;
         updatedUsers = updatedUsers.map((u: any) => {
-          if (u.id === 'user-shivanshu' && u.avatarUrl !== '/src/assets/images/regenerated_image_1783594209532.jpg') {
-            u.avatarUrl = '/src/assets/images/regenerated_image_1783594209532.jpg';
+          if (u.id === 'user-shivanshu' && u.avatarUrl !== 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=200') {
+            u.avatarUrl = 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=200';
             updated = true;
           }
           return u;

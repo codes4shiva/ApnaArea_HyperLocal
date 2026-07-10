@@ -22,7 +22,7 @@ export const SEED_USERS: User[] = [
     role: PlatformRole.USER, // Creator
     isPhoneVerified: true,
     isEmailVerified: true,
-    avatarUrl: '/src/assets/images/regenerated_image_1783594209532.jpg',
+    avatarUrl: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=200',
     bio: 'Software engineer and co-founder of ApnaArea. Passionate about hyper-local community development and civil public discussions.',
     joinedAt: '2026-06-01T09:00:00Z'
   },
@@ -271,7 +271,7 @@ export const SEED_LISTINGS: Listing[] = [
     description: 'Perfect working condition retro vintage typewriter to write awesome stories or add an elegant rustic touch to your study table. Ribbon included.',
     price: 3999,
     category: 'Collectibles',
-    image: '/src/assets/images/regenerated_image_1783592286024.webp',
+    image: 'https://images.unsplash.com/photo-1516962215378-7fa2e137ae93?auto=format&fit=crop&q=80&w=600',
     status: 'ACTIVE',
     createdAt: '2026-06-25T11:00:00Z'
   },
