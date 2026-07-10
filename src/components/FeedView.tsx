@@ -301,7 +301,7 @@ export default function FeedView({
             <img 
               src={currentUser.avatarUrl} 
               alt={currentUser.name} 
-              className="w-10 h-10 object-cover border border-[#e1e1de] rounded-none" 
+              className="w-10 h-10 object-cover border border-[#e1e1de] rounded-full" 
               referrerPolicy="no-referrer"
             />
             <div className="flex-1 min-w-0">
@@ -309,7 +309,7 @@ export default function FeedView({
                 placeholder="Post a message, event, poll or alert to your neighbors..."
                 value={newPostText}
                 onChange={(e) => setNewPostText(e.target.value)}
-                className="w-full text-xs text-[#1A1A1A] bg-[#fdfdfb] border border-[#e1e1de] focus:border-[#1A1A1A] p-3 focus:outline-none min-h-[72px] resize-none transition-all rounded-none font-serif italic"
+                className="w-full text-sm text-[#1A1A1A] bg-[#fdfdfb] border border-[#e1e1de] focus:border-[#1A1A1A] p-3 focus:outline-none min-h-[72px] resize-none transition-all rounded-none font-sans"
                 id="composer-textarea"
                 required
               />
@@ -413,13 +413,13 @@ export default function FeedView({
                 <div className="flex items-start justify-between">
                   <div 
                     onClick={() => onViewProfile && onViewProfile(post.userId)}
-                    className="flex items-center gap-3 bg-[#fef9f9] p-1.5 border border-[#e1e1de]/40 cursor-pointer group hover:border-[#1A1A1A] transition-colors"
+                    className="flex items-center gap-3 bg-[#fef9f9] p-1.5 border border-[#e1e1de]/40 cursor-pointer group hover:border-[#1A1A1A] transition-colors rounded-none"
                     title={`View ${post.authorName}'s Profile`}
                   >
                     <img 
                       src={post.authorAvatar || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=100'} 
                       alt={post.authorName} 
-                      className="w-10 h-10 object-cover border border-[#e1e1de] group-hover:border-[#1A1A1A] shrink-0 rounded-none transition-colors"
+                      className="w-10 h-10 object-cover border border-[#e1e1de] group-hover:border-[#1A1A1A] shrink-0 rounded-full transition-colors"
                       referrerPolicy="no-referrer"
                     />
                     <div>
@@ -428,18 +428,18 @@ export default function FeedView({
                         
                         {/* Display post-level neighborhood roles */}
                         {getUserRoleInNeighborhood(post.userId, activeNeighborhood.id) === NeighborhoodRole.MODERATOR && (
-                          <span className="bg-[#f3f3f1] text-[#1A1A1A] text-[8px] font-bold px-1.5 py-0.5 border border-[#1A1A1A] uppercase tracking-wide rounded-none">MODERATOR</span>
+                           <span className="bg-[#f3f3f1] text-[#1A1A1A] text-[8px] font-bold px-1.5 py-0.5 border border-[#1A1A1A] uppercase tracking-wide rounded-none">MODERATOR</span>
                         )}
                         {post.userId === currentUser.id && (
                           <span className="bg-[#f3f3f1] text-[#1A1A1A]/70 text-[8px] font-bold px-1 py-0.5 border border-[#e1e1de] uppercase tracking-wide rounded-none">You</span>
                         )}
                       </div>
                       
-                      {/* Sub-header (PRD: real identities) */}
-                      <div className="flex items-center gap-2 text-[10px] text-[#1A1A1A]/60 font-medium">
-                        <span className="flex items-center gap-0.5 font-serif italic">
-                          <Clock size={9} />
-                          {new Date(post.createdAt).toLocaleDateString([], { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}
+                      {/* Sub-header (PRD: real identities) - Beautiful colored badge */}
+                      <div className="flex items-center gap-2 mt-1">
+                        <span className="inline-flex items-center gap-1 bg-violet-50 text-violet-700 border border-violet-100 px-2 py-0.5 text-[10px] font-semibold rounded-full font-sans shadow-xs">
+                          <Clock size={10} className="text-violet-600 shrink-0" />
+                          <span>{new Date(post.createdAt).toLocaleDateString([], { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</span>
                         </span>
                       </div>
                     </div>
@@ -470,13 +470,13 @@ export default function FeedView({
                     )}
                   </div>
                 </div>                {/* Body Content */}
-                <div className="text-[13px] text-[#1A1A1A] leading-relaxed whitespace-pre-wrap px-1 font-serif">
+                <div className="text-[15px] md:text-base text-[#1A1A1A] leading-relaxed whitespace-pre-wrap px-1 font-serif italic">
                   {editingPostId === post.id ? (
                     <div className="space-y-2">
                       <textarea
                         value={editPostText}
                         onChange={(e) => setEditPostText(e.target.value)}
-                        className="w-full text-xs border border-[#e1e1de] p-2.5 focus:outline-none focus:border-[#1A1A1A] bg-[#fdfdfb] rounded-none"
+                        className="w-full text-sm border border-[#e1e1de] p-2.5 focus:outline-none focus:border-[#1A1A1A] bg-[#fdfdfb] rounded-none font-sans"
                       />
                       <div className="flex gap-1.5 justify-end">
                         <button onClick={() => setEditingPostId(null)} className="text-[10px] font-semibold uppercase tracking-wider text-[#1A1A1A]/70 py-1 px-2 hover:bg-[#f3f3f1] rounded-none">Cancel</button>
@@ -545,7 +545,7 @@ export default function FeedView({
                       <img 
                         src={currentUser.avatarUrl} 
                         alt={currentUser.name} 
-                        className="w-8 h-8 object-cover shrink-0 border border-[#e1e1de] rounded-none" 
+                        className="w-8 h-8 object-cover shrink-0 border border-[#e1e1de] rounded-full" 
                         referrerPolicy="no-referrer"
                       />
                       <div className="flex-1 flex gap-2">
@@ -554,7 +554,7 @@ export default function FeedView({
                           placeholder="Write a warm reply..."
                           value={commentInputs[post.id] || ''}
                           onChange={(e) => setCommentInputs({ ...commentInputs, [post.id]: e.target.value })}
-                          className="flex-1 text-xs border border-[#e1e1de] px-3 py-2 focus:outline-none focus:border-[#1A1A1A] bg-[#fdfdfb] rounded-none font-serif"
+                          className="flex-1 text-xs border border-[#e1e1de] px-3 py-2 focus:outline-none focus:border-[#1A1A1A] bg-[#fdfdfb] rounded-none font-sans"
                         />
                         <button
                           onClick={() => handleAddComment(post.id)}
@@ -577,7 +577,7 @@ export default function FeedView({
                             <img 
                               src={cmt.authorAvatar || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=100'} 
                               alt={cmt.authorName} 
-                              className="w-7 h-7 object-cover shrink-0 border border-[#e1e1de] group-hover:border-[#1A1A1A] rounded-none transition-colors" 
+                              className="w-7 h-7 object-cover shrink-0 border border-[#e1e1de] group-hover:border-[#1A1A1A] rounded-full transition-colors" 
                               referrerPolicy="no-referrer"
                             />
                             <div className="min-w-0">
@@ -587,8 +587,8 @@ export default function FeedView({
                                   <span className="bg-[#f3f3f1] text-[#1A1A1A] border border-[#1A1A1A] text-[7px] px-1 font-bold uppercase rounded-none">MOD</span>
                                 )}
                               </div>
-                              <p className="text-[#1A1A1A]/85 mt-1 text-[11px] leading-relaxed font-serif">{cmt.text}</p>
-                              <span className="text-[9px] text-[#1A1A1A]/50 mt-1 block font-serif italic">
+                              <p className="text-[#1A1A1A]/85 mt-1 text-[11px] leading-relaxed font-sans">{cmt.text}</p>
+                              <span className="text-[9px] text-indigo-600/70 mt-1 block font-sans font-medium">
                                 {new Date(cmt.createdAt).toLocaleDateString([], { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}
                               </span>
                             </div>
