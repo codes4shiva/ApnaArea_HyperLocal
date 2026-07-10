@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+  --font-serif: "Playfair Display", "Georgia", serif;
+}
+
+/* Custom smooth scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #1a1a1a20;
+  border-radius: 0px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #1a1a1a50;
+}
+
+/* Artistic Flair Helper Classes */
+.serif {
+  font-family: "Playfair Display", Georgia, serif;
+  font-style: italic;
+}
+
+.letter-spacing-wide {
+  letter-spacing: 0.15em;
+}
+
+.letter-spacing-extra-wide {
+  letter-spacing: 0.25em;
+}
+
+/* Custom styles to match the Aether Studio style */
+.artistic-card {
+  background-color: #ffffff;
+  border: 1px solid #e1e1de;
+  box-shadow: none;
+  transition: all 0.2s ease;
+}
+
+.artistic-card:hover {
+  border-color: #1a1a1a;
+}
+
+.artistic-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border: 1px solid #1a1a1a;
+  text-transform: uppercase;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  background-color: transparent;
+}
+
+.artistic-button-primary {
+  background-color: #1a1a1a;
+  color: #ffffff;
+  text-transform: uppercase;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  padding: 0.75rem 1.5rem;
+  border: 1px solid #1a1a1a;
+  transition: all 0.2s ease;
+}
+
+.artistic-button-primary:hover {
+  background-color: #333333;
+  border-color: #333333;
+}
+
+.artistic-button-secondary {
+  background-color: transparent;
+  color: #1a1a1a;
+  text-transform: uppercase;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  padding: 0.75rem 1.5rem;
+  border: 1px solid #e1e1de;
+  transition: all 0.2s ease;
+}
+
+.artistic-button-secondary:hover {
+  border-color: #1a1a1a;
+  background-color: #f3f3f1;
+}
+
+.artistic-input {
+  border: 1px solid #e1e1de;
+  background-color: #fdfdfb;
+  color: #1a1a1a;
+  transition: all 0.15s ease;
+}
+
+.artistic-input:focus {
+  border-color: #1a1a1a;
+  background-color: #ffffff;
+}
