@@ -12,8 +12,8 @@ import {
   Check, 
   Menu 
 } from 'lucide-react';
-import { User, Neighborhood, Notification, PlatformRole } from '../types';
-import { getUsers, setCurrentUserId, getNotifications, saveNotifications } from '../data/store';
+import { User, Neighborhood, Notification, PlatformRole, NeighborhoodRole } from '../types';
+import { getUsers, setCurrentUserId, getNotifications, saveNotifications, getUserRoleInNeighborhood } from '../data/store';
 
 interface HeaderProps {
   currentUser: User;
@@ -24,6 +24,7 @@ interface HeaderProps {
   unreadCount: number;
   onNotificationRead: () => void;
   onMenuToggle?: () => void;
+  onShowPortal?: () => void;
 }
 
 export default function Header({ 
@@ -34,13 +35,15 @@ export default function Header({
   setSearchQuery,
   unreadCount,
   onNotificationRead,
-  onMenuToggle
+  onMenuToggle,
+  onShowPortal
 }: HeaderProps) {
   const [showUserDropdown, setShowUserDropdown] = useState(false);
   const [showNotifDropdown, setShowNotifDropdown] = useState(false);
 
   const allUsers = getUsers();
   const allNotifs = getNotifications().filter(n => n.recipientId === currentUser.id);
+  const userRole = getUserRoleInNeighborhood(currentUser.id, activeNeighborhood.id);
 
   const handleSwitchUser = (userId: string) => {
     setCurrentUserId(userId);
@@ -198,6 +201,18 @@ export default function Header({
             )}
           </div>
 
+          {/* Portal button for recruiters */}
+          {onShowPortal && (
+            <button
+              onClick={onShowPortal}
+              className="flex items-center gap-1.5 bg-violet-50 text-violet-700 hover:bg-violet-100 border border-violet-200 px-3 py-1.5 transition-colors cursor-pointer text-[11px] font-bold uppercase tracking-wider"
+              title="Return to Welcome Portal / Landing Page"
+            >
+              <LogOut size={12} />
+              <span className="hidden md:inline">Exit to Portal</span>
+            </button>
+          )}
+
           {/* User Account Switcher - Extremely valuable tool for demonstrating different workflows */}
           <div className="relative">
             <button
@@ -208,16 +223,16 @@ export default function Header({
               className="flex items-center gap-2 bg-white hover:bg-[#f3f3f1] border border-[#e1e1de] px-2.5 py-1.5 transition-colors cursor-pointer"
               id="btn-user-dropdown"
             >
-              <div className="w-7 h-7 overflow-hidden border border-[#e1e1de]">
+              <div className="w-7 h-7 overflow-hidden border border-[#e1e1de] rounded-full">
                 {currentUser.avatarUrl ? (
                   <img 
                     src={currentUser.avatarUrl} 
                     alt={currentUser.name} 
-                    className="w-full h-full object-cover" 
+                    className="w-full h-full object-cover rounded-full" 
                     referrerPolicy="no-referrer"
                   />
                 ) : (
-                  <div className="w-full h-full bg-[#f3f3f1] text-[#1A1A1A] flex items-center justify-center font-bold text-xs">
+                  <div className="w-full h-full bg-[#f3f3f1] text-[#1A1A1A] flex items-center justify-center font-bold text-xs rounded-full">
                     {currentUser.name[0]}
                   </div>
                 )}
@@ -227,48 +242,65 @@ export default function Header({
                   {currentUser.name.split(' ')[0]}
                 </div>
                 <div className="text-[9px] text-[#1A1A1A]/60 font-serif italic leading-none">
-                  Verified Resident
+                  {userRole === NeighborhoodRole.MODERATOR ? 'Community Moderator' : currentUser.id === 'user-dianne' ? 'Local Seller' : 'Verified Resident'}
                 </div>
               </div>
               <ChevronDown size={14} className="text-[#1A1A1A]/60" />
             </button>
 
-            {/* Dropdown containing all seed users for role switching */}
+            {/* Clean personal profile card instead of a multi-user hack dropdown */}
             {showUserDropdown && (
-              <div className="absolute right-0 mt-2 w-56 bg-white border border-[#1A1A1A] py-1.5 z-50">
-                <div className="px-3 py-1.5 border-b border-[#e1e1de]">
-                  <span className="text-[10px] font-bold text-[#1A1A1A] uppercase tracking-wider block letter-spacing-wide">Switch Persona</span>
-                  <p className="text-[10px] text-[#1A1A1A]/60 leading-normal mt-0.5 font-serif italic">Test ApnaArea with other roles.</p>
-                </div>
-                <div className="max-h-56 overflow-y-auto py-1">
-                  {allUsers.map((u) => (
-                    <button
-                      key={u.id}
-                      onClick={() => handleSwitchUser(u.id)}
-                      className={`w-full px-3 py-2 text-left hover:bg-[#f3f3f1] transition-colors flex items-center justify-between gap-2.5 cursor-pointer ${
-                        u.id === currentUser.id ? 'bg-[#f3f3f1]' : ''
-                      }`}
-                    >
-                      <div className="flex items-center gap-2">
-                        <img 
-                          src={u.avatarUrl} 
-                          alt={u.name} 
-                          className="w-6 h-6 rounded-none object-cover border border-[#e1e1de]" 
-                          referrerPolicy="no-referrer"
-                        />
-                        <div className="min-w-0">
-                          <span className="text-xs font-semibold text-[#1A1A1A] block truncate font-serif italic">{u.name}</span>
-                          <span className="text-[9px] text-[#1A1A1A]/60 block leading-none font-mono">
-                            Resident
-                          </span>
-                        </div>
+              <div className="absolute right-0 mt-2 w-60 bg-white border border-[#1A1A1A] shadow-md z-50">
+                <div className="p-4 border-b border-[#e1e1de] text-center flex flex-col items-center">
+                  <div className="w-12 h-12 overflow-hidden border border-[#e1e1de] rounded-full mb-2">
+                    {currentUser.avatarUrl ? (
+                      <img 
+                        src={currentUser.avatarUrl} 
+                        alt={currentUser.name} 
+                        className="w-full h-full object-cover rounded-full" 
+                        referrerPolicy="no-referrer"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-[#f3f3f1] text-[#1A1A1A] flex items-center justify-center font-bold text-sm rounded-full">
+                        {currentUser.name[0]}
                       </div>
-                      {u.id === currentUser.id && (
-                        <Check size={14} className="text-[#1A1A1A]" />
-                      )}
-                    </button>
-                  ))}
+                    )}
+                  </div>
+                  <h4 className="font-serif italic font-bold text-sm text-[#1A1A1A]">{currentUser.name}</h4>
+                  <p className="text-[10px] text-[#1A1A1A]/60 font-mono mt-0.5">{currentUser.phone || 'Verified Neighbor'}</p>
+                  
+                  <div className="mt-3">
+                    {userRole === NeighborhoodRole.MODERATOR ? (
+                      <span className="text-[9px] font-mono text-violet-700 font-bold bg-violet-50 px-2 py-0.5 border border-violet-200 uppercase tracking-wider">
+                        Moderator Scope
+                      </span>
+                    ) : currentUser.id === 'user-dianne' ? (
+                      <span className="text-[9px] font-mono text-indigo-700 font-bold bg-indigo-50 px-2 py-0.5 border border-indigo-200 uppercase tracking-wider">
+                        Seller Scope
+                      </span>
+                    ) : (
+                      <span className="text-[9px] font-mono text-emerald-700 font-bold bg-emerald-50 px-2 py-0.5 border border-emerald-200 uppercase tracking-wider">
+                        Verified Resident
+                      </span>
+                    )}
+                  </div>
                 </div>
+                
+                <div className="p-3 bg-slate-50 text-[10px] text-[#1A1A1A]/70 leading-relaxed border-b border-[#e1e1de]">
+                  <p>This neighborhood is restricted by pincode to verified local residents only. Your profile is active and authenticated.</p>
+                </div>
+
+                {onShowPortal && (
+                  <div className="p-2">
+                    <button
+                      onClick={onShowPortal}
+                      className="w-full text-center px-3 py-2 text-[10px] font-bold bg-red-50 text-red-700 hover:bg-red-100/80 border border-red-200 transition-colors flex items-center justify-center gap-1.5 uppercase tracking-wide cursor-pointer font-sans"
+                    >
+                      <LogOut size={12} />
+                      Log Out & Exit
+                    </button>
+                  </div>
+                )}
               </div>
             )}
           </div>

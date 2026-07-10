@@ -129,15 +129,19 @@ export function initializeStore() {
       }
     }
 
-    // Migration: Update list-1 image to the new local image path if stored
+    // Migration: Update list-1 image and details to Apple iPad Pro
     const existingListingsRaw = localStorage.getItem(KEYS.LISTINGS);
     if (existingListingsRaw) {
       try {
         let updatedListings = JSON.parse(existingListingsRaw);
         let updated = false;
         updatedListings = updatedListings.map((l: any) => {
-          if (l.id === 'list-1' && l.image !== 'https://images.unsplash.com/photo-1516962215378-7fa2e137ae93?auto=format&fit=crop&q=80&w=600') {
-            l.image = 'https://images.unsplash.com/photo-1516962215378-7fa2e137ae93?auto=format&fit=crop&q=80&w=600';
+          if (l.id === 'list-1' && (l.image !== 'https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&q=80&w=600' || l.title !== 'Apple iPad Pro 11-inch (M1, Wi-Fi, 128GB)')) {
+            l.title = 'Apple iPad Pro 11-inch (M1, Wi-Fi, 128GB)';
+            l.description = 'Excellent condition iPad Pro with M1 chip. Always used with a screen protector and a rugged case. Includes the original box and charger. Battery health is at 92%, extremely snappy and perfect for taking notes, sketching, or watching videos.';
+            l.price = 42000;
+            l.category = 'Electronics';
+            l.image = 'https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&q=80&w=600';
             updated = true;
           }
           return l;

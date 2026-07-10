@@ -172,7 +172,7 @@ export default function MembersView({
                   <img 
                     src={user.avatarUrl || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=100'} 
                     alt={user.name} 
-                    className="w-12 h-12 rounded-none object-cover border border-[#e1e1de] group-hover:border-[#1A1A1A] shrink-0 transition-colors" 
+                    className="w-12 h-12 rounded-full object-cover border border-[#e1e1de] group-hover:border-[#1A1A1A] shrink-0 transition-colors" 
                     referrerPolicy="no-referrer"
                   />
                   <div className="min-w-0 flex-1">

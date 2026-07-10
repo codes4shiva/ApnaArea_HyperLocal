@@ -173,11 +173,11 @@ export default function ProfileView({
             <div className="flex flex-col sm:flex-row items-stretch gap-5 p-4 border border-[#e1e1de] bg-[#FAF9F6]">
               {/* Avatar Live Preview */}
               <div className="flex flex-col items-center justify-center gap-2 shrink-0">
-                <div className="relative group w-24 h-24">
+                <div className="relative group w-24 h-24 rounded-full overflow-hidden">
                   <img 
                     src={avatarUrl || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=200'} 
                     alt={name} 
-                    className="w-full h-full rounded-none object-cover border-2 border-[#1A1A1A] bg-white shadow-xs" 
+                    className="w-full h-full rounded-full object-cover border-2 border-[#1A1A1A] bg-white shadow-xs" 
                     referrerPolicy="no-referrer"
                     onError={(e) => {
                       (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=200';
@@ -186,7 +186,7 @@ export default function ProfileView({
                   <button
                     type="button"
                     onClick={triggerFileInput}
-                    className="absolute inset-0 bg-[#1A1A1A]/60 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 cursor-pointer"
+                    className="absolute inset-0 bg-[#1A1A1A]/60 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 cursor-pointer rounded-full"
                   >
                     <Camera size={16} className="text-white mb-1" />
                     <span className="text-[9px] text-white font-sans font-bold uppercase tracking-wider">Change</span>

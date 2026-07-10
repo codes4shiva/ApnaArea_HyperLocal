@@ -19,6 +19,7 @@ import ProfileView from './components/ProfileView';
 import ChatOverlay from './components/ChatOverlay';
 import UserProfileModal from './components/UserProfileModal';
 import { ShieldCheck, UserCheck, Compass } from 'lucide-react';
+import LandingPage from './components/LandingPage';
 
 export default function App() {
   // Initialize standard seeds if localStorage is vacant
@@ -34,6 +35,7 @@ export default function App() {
   const [refreshKey, setRefreshKey] = useState<number>(0);
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
   const [selectedProfileUserId, setSelectedProfileUserId] = useState<string | null>(null);
+  const [showLanding, setShowLanding] = useState<boolean>(true);
 
   // Triggered whenever notifications or data elements update
   const handleRefresh = () => {
@@ -60,6 +62,17 @@ export default function App() {
 
   const userRole = getUserRoleInNeighborhood(currentUser.id, activeNeighborhood.id);
 
+  if (showLanding) {
+    return (
+      <LandingPage 
+        onLogin={(selectedUser) => {
+          handleUserChanged(selectedUser);
+          setShowLanding(false);
+        }} 
+      />
+    );
+  }
+
   return (
     <div className="min-h-screen bg-slate-50/50 flex flex-col text-slate-800 antialiased font-sans selection:bg-violet-100 selection:text-violet-800" id="apna-area-app">
       
@@ -73,6 +86,7 @@ export default function App() {
         unreadCount={unreadCount}
         onNotificationRead={handleRefresh}
         onMenuToggle={() => setIsMobileSidebarOpen(prev => !prev)}
+        onShowPortal={() => setShowLanding(true)}
       />
 
       {/* CORE WRAPPER */}

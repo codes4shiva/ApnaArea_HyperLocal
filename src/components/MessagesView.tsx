@@ -120,7 +120,7 @@ export default function MessagesView({ currentUser, onRefresh }: MessagesViewPro
                   <img
                     src={otherUser.avatarUrl || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=100'}
                     alt={otherUser.name}
-                    className="w-10 h-10 rounded-none object-cover border border-[#e1e1de]"
+                    className="w-10 h-10 rounded-full object-cover border border-[#e1e1de]"
                     referrerPolicy="no-referrer"
                   />
                   <div className="min-w-0 flex-1">
@@ -177,7 +177,7 @@ export default function MessagesView({ currentUser, onRefresh }: MessagesViewPro
                 <img
                   src={activeInfo.otherUser.avatarUrl || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=100'}
                   alt={activeInfo.otherUser.name}
-                  className="w-9 h-9 rounded-none object-cover border border-[#e1e1de]"
+                  className="w-9 h-9 rounded-full object-cover border border-[#e1e1de]"
                   referrerPolicy="no-referrer"
                 />
                 <div>
