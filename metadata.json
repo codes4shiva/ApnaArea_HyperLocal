@@ -1,0 +1,6 @@
+{
+  "name": "ApnaArea",
+  "description": "A hyperlocal community platform for Indian neighborhoods built on verified real-world identities, featuring local posts, neighborhood marketplace listings, upcoming events, and report-based community moderation.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
