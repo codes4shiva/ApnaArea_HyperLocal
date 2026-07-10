@@ -147,11 +147,11 @@ export default function UserProfileModal({
           <div className="flex flex-col sm:flex-row items-center sm:items-start gap-5">
             
             {/* Large Avatar */}
-            <div className="relative shrink-0">
+            <div className="relative shrink-0 rounded-full">
               <img 
                 src={profileUser.avatarUrl || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=200'} 
                 alt={profileUser.name} 
-                className="w-20 h-20 border-2 border-[#1A1A1A] object-cover bg-white shadow-xs" 
+                className="w-20 h-20 border-2 border-[#1A1A1A] object-cover bg-white shadow-xs rounded-full" 
                 referrerPolicy="no-referrer"
               />
               {isUserMod && (
