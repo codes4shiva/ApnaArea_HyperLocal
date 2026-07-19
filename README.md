@@ -123,5 +123,3 @@ VITE_CLOUDINARY_UPLOAD_PRESET=your_upload_preset
 > ⚠️ Never commit `.env.local` — it's in `.gitignore`
 
 ---
-
-## 🗂️ Project Structure
