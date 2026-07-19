@@ -120,6 +120,4 @@ VITE_CLOUDINARY_CLOUD_NAME=your_cloud_name
 VITE_CLOUDINARY_UPLOAD_PRESET=your_upload_preset
 ```
 
-> ⚠️ Never commit `.env.local` — it's in `.gitignore`
 
----
